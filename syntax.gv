@@ -1,0 +1,25 @@
+digraph G {
+    a -> b
+    a -> 6
+    b -> c
+    b -> 5
+    c -> d
+    c -> 4
+    d -> e
+    d -> 3
+    e -> f
+    f -> 1
+    f -> 2
+    a [label="."]
+    b [label="."]
+    6 [label="#"]
+    c [label="."]
+    5 [label="b"]
+    d [label="."]
+    4 [label="b"]
+    e [label="*"]
+    3 [label="a"]
+    f [label="|"]
+    2 [label="b"]
+    1 [label="a"]
+}
