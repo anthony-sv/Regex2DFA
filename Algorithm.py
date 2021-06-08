@@ -6,6 +6,12 @@ from Symbol import Symbol
 from Tree import Tree
 from Postfix import Postfix
 from Regex import Regex
+from AFD import Afd
+from FSM import Fsm
+from Alphabet import Alphabet
+from Transition import Transition
+from State import State
+from PlotAutomaton import PlotAutomaton
 class Algorithm:
     def __init__(self,regex):
         self.__regex = Regex(regex).expression
@@ -176,6 +182,12 @@ class Algorithm:
                 al.append(l[i])
         return list(dict.fromkeys(al))
 
+    def getSharpPos(self):
+        res = Tree.postorderTraversalTree(self.__tree)
+        for x in res:
+            if x.getNode().getData() == '#':
+                return x.getNode().getPos()
+
     def getAutomaton(self):
         sig = self.trySiguientes()
         inits = self.__tree.getNode().getPrimeros()
@@ -198,10 +210,22 @@ class Algorithm:
                 if u not in Destados:
                     Destados.append(u)
                     sinmarcar.append(u)
-                Dtrans[frozenset(s), sy] = u
-        print(inits)
-        print(Destados)
-        print(Dtrans)
+                Dtrans[State(s), Symbol(sy)] = State(u)
+        #construct automaton
+        D = Afd([], Fsm([], None, Alphabet()), Transition({}))
+        D.Fsm.q0 = State(inits, True, False)
+        for x in Destados:
+            D.Fsm.Q.append(State(x))
+        D.Transition.dict = Dtrans
+        for x in Algorithm.getAlphabetFromRegex(self.__fregex):
+            D.Fsm.Sigma.sigma.append(Symbol(x))
+        for y in D.Fsm.Q:
+            if self.getSharpPos() in y.getName():
+                y.setIsFinalState()
+        for z in D.Fsm.Q:
+            if State.getIsFinalState(z):
+                D.F.append(z)
+        self.setAfd(D)
 
     def TreeAlgorithm(self):
         self.setFRegex(Postfix(Regex(Algorithm.extendRegex(self.__regex))).getPostfix())
@@ -212,3 +236,15 @@ class Algorithm:
         self.tryUltimos()
         print(self.trySiguientes())
         self.getAutomaton()
+    
+    def printDFA(self):
+        #plotTree
+        print("\nEl AFD para la expresión regular es:")
+        print("")
+        Afd.printDFAStates(self.getAfd().Fsm.Q)
+        Afd.printAlphabet(self.getAfd().Fsm.Sigma.sigma)
+        print("q0: ",Afd.printDFAState(self.getAfd().Fsm.q0))
+        Afd.printFinalStates(self.getAfd().F)
+        Afd.printDFATransition(self.getAfd().Transition.dict)
+        P = PlotAutomaton(self.getAfd())
+        P.plotDFA(self.getRegex())

@@ -8,7 +8,7 @@ class Afd(Acceptor):
 
     @staticmethod
     def printDFAState(state):
-        return f"{set([x.getName() for x in state.getName()])}"
+        return f"{state.getName()}"
 
     @staticmethod
     def printDFAStates(listofstates):
