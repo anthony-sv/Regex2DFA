@@ -208,10 +208,11 @@ class Algorithm:
                 for pos in s:
                     if auxdict[pos] == sy:
                         u = u | sig[pos]
-                if u not in Destados:
+                if u not in Destados and len(u) != 0:
                     Destados.append(u)
                     sinmarcar.append(u)
-                Dtrans[State(s), Symbol(sy)] = State(u)
+                if len(u) != 0:
+                    Dtrans[State(s), Symbol(sy)] = State(u)
         #construct automaton
         D = Afd([], Fsm([], None, Alphabet()), Transition({}))
         D.Fsm.q0 = State(inits, True, False)
