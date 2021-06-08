@@ -10,16 +10,16 @@ digraph G {
     e -> f
     f -> 1
     f -> 2
-    a [label="."]
-    b [label="."]
-    6 [label="#"]
-    c [label="."]
-    5 [label="b"]
-    d [label="."]
-    4 [label="b"]
-    e [label="*"]
-    3 [label="a"]
-    f [label="|"]
-    2 [label="b"]
-    1 [label="a"]
+    a [label="X\n{1,2,3} . {6}"]
+    b [label="X\n{1,2,3} . {5}"]
+    6 [label="X\n{6} # {6}"]
+    c [label="X\n{1,2,3} . {4}"]
+    5 [label="X\n{5} b {5}"]
+    d [label="X\n{1,2,3} . {3}"]
+    4 [label="X\n{4} b {4}"]
+    e [label="✓\n{1,2} * {1,2}"]
+    3 [label="X\n{3} a {3}"]
+    f [label="X\n{1,2} | {1,2}"]
+    2 [label="X\n{2} b {2}"]
+    1 [label="X\n{1} a {1}"]
 }

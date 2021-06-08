@@ -4,9 +4,8 @@ from Symbol import Symbol
 
 class Postfix:
     def __init__(self, regex):
-        self.__regex = regex.expression #original
-        self.__extended = Postfix.extendRegex(self.__regex) #should be in TreeAlgo class
-        self.__modr = Postfix.modRegex(self.__extended)
+        self.__regex = regex.expression
+        self.__modr = Postfix.modRegex(self.__regex)
         self.__pila = Stack()
         self.__postfix = self.convertInfixToPostfix()
     
@@ -22,13 +21,6 @@ class Postfix:
     def getPostfix(self):
         return self.__postfix
 
-    @staticmethod    
-    def extendRegex(regex):
-        l = ['(']
-        for x in regex:
-            l.append(x)
-        return "".join(l)+")#"
-    
     @staticmethod
     def isConcat(character, nextCharacter):
         if Symbol.isOperand(character) and Symbol.isOperand(nextCharacter):
