@@ -35,6 +35,8 @@ class Postfix:
             return True
         elif Symbol.isRightParenthesis(character) and nextCharacter == "#":
             return True
+        elif Symbol.isRightParenthesis(character) and Symbol.isOperand(nextCharacter):
+            return True
         else:
             return False
 

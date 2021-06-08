@@ -137,18 +137,18 @@ class Algorithm:
                 s.add(x.getNode().getPos())
                 x.getNode().setUltimos(s)
             elif x.getNode().getData() == '|':
-                ppc1 = x.getLeft().getNode().getPrimeros()
-                ppc2 = x.getRight().getNode().getPrimeros()
-                x.getNode().setUltimos(ppc2 | ppc1)
+                upc1 = x.getLeft().getNode().getUltimos()
+                upc2 = x.getRight().getNode().getUltimos()
+                x.getNode().setUltimos(upc1 | upc2)
             elif x.getNode().getData() == '.':
                 if x.getRight().getNode().getAnulable() == True:
-                    ppc1 = x.getLeft().getNode().getPrimeros()
-                    ppc2 = x.getRight().getNode().getPrimeros()
-                    x.getNode().setUltimos(ppc2 | ppc1)
+                    upc1 = x.getLeft().getNode().getUltimos()
+                    upc2 = x.getRight().getNode().getUltimos()
+                    x.getNode().setUltimos(upc2 | upc1)
                 else:
-                    x.getNode().setUltimos(x.getRight().getNode().getPrimeros())
+                    x.getNode().setUltimos(x.getRight().getNode().getUltimos())
             elif x.getNode().getData() == '*':
-                x.getNode().setUltimos(x.getLeft().getNode().getPrimeros())
+                x.getNode().setUltimos(x.getLeft().getNode().getUltimos())
 
     def trySiguientes(self):
         res = Tree.postorderTraversalTree(self.__tree)
