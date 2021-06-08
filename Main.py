@@ -1,4 +1,5 @@
+import sys
 from Algorithm import Algorithm
-a = Algorithm("(a|b)*abb")
+a = Algorithm(sys.argv[1])
 a.TreeAlgorithm()
 a.printDFA()

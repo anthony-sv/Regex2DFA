@@ -1,4 +1,5 @@
 
+from PlotTree import PlotTree
 from Stack import Stack
 from SyntaxNode import SyntaxNode
 from SyntaxTree import SyntaxTree
@@ -234,11 +235,12 @@ class Algorithm:
         self.tryAnulable()
         self.tryPrimeros()
         self.tryUltimos()
-        print(self.trySiguientes())
+        self.trySiguientes()
         self.getAutomaton()
     
     def printDFA(self):
-        #plotTree
+        PT = PlotTree(self.__tree)
+        PT.plotTree(self.getSyntaxTree())
         print("\nEl AFD para la expresión regular es:")
         print("")
         Afd.printDFAStates(self.getAfd().Fsm.Q)
@@ -246,5 +248,5 @@ class Algorithm:
         print("q0: ",Afd.printDFAState(self.getAfd().Fsm.q0))
         Afd.printFinalStates(self.getAfd().F)
         Afd.printDFATransition(self.getAfd().Transition.dict)
-        P = PlotAutomaton(self.getAfd())
-        P.plotDFA(self.getRegex())
+        PA = PlotAutomaton(self.getAfd())
+        PA.plotDFA(self.getRegex())
