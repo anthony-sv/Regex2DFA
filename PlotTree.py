@@ -28,8 +28,8 @@ class PlotTree():
                     p1 = s.pop()
                     p2 = s.pop()
                     auxdict[x] = i
-                    lines.append(f'\t{i} -> {auxdict[p1]}\n')
                     lines.append(f'\t{i} -> {auxdict[p2]}\n')
+                    lines.append(f'\t{i} -> {auxdict[p1]}\n')
                     s.push(x)
                 elif Symbol.isStar(x.getNode().getData()):
                     p = s.pop()
